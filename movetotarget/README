@@ -1,0 +1,21 @@
+#This script should be copied into ${HOME}/bin directory and
+#should be used like this:
+
+        $ movetotarget.sh source_dir_path target_dir_path
+
+#or as a background job:
+
+        $ movetotarget.sh source_dir_path target_dir_path &
+
+#but the processes(copying files) can not be seen in this situation.
+
+
+
+
+#Or else (if you can not refresh user session) you can use this command
+#movetotarget.sh file where is in your local:
+
+        $ ./movetotarget.sh source_dir_path target_dir_path
+#or
+        $ ./movetotarget.sh source_dir_path target_dir_path &
+

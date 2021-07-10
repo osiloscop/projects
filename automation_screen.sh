@@ -22,7 +22,7 @@ caput BL:INJ:FPC2_01:CH0"$SCREEN_NUMBER"SET 1
 
 if [ $SCREEN_STATE == 1 ] && [ $CAMERA_STATE == 1 ]; then
    while [ $COUNT_IMG_NUM -lt $EXPECTED_DATA_NUMBERS ]; do 
-      caget -t BL:DCC:image1:ArrayData > $(date +%Y%m%d)_$COUNT_IMG_NUM.raw 
+      caget -t BL:DCC:image1:ArrayData > $(date +%Y%m%d)_cam"$CAMERA_NUMBER"_$COUNT_IMG_NUM.raw 
       let COUNT_IMG_NUM+=1
       END_TIME=$(date +%s)
       echo "$(date +%Y%m%d)_$COUNT_IMG_NUM.raw data is gotten. $(( $END_TIME - $START_TIME )) second"

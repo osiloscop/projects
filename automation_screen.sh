@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCREEN_STATE=$(echo $(caget BL:INJ:FPC2_01:CH01RB) | cut -d ' ' -f 2)
-CAMERA_STATE=$(echo $(caget BL:DCC:CamSelector1) | cut -d ' ' -f 2)
 COUNT_DATA_NUM=0
 DATA_SAVE_PATH="/home/test_data"
 
@@ -13,8 +12,12 @@ read -p "CAMERA_NUMBER: " CAMERA_NUMBER
 
 SCREEN_NUMBER=$CAMERA_NUMBER
 
-caput BL:DCC:CamSelector$CAMERA_NUMBER 1
-sleep 10
+CAMERA_STATE=$(echo $(caget BL:DCC:CamSelector$CAMERA_NUMBER) | cut -d ' ' -f 2)
+
+if [ $CAMERA_STATE == 0 ]; then
+   caput BL:DCC:CamSelector$CAMERA_NUMBER 1
+   sleep 10
+fi
 
 START_TIME=$(date +%s)
 
@@ -31,7 +34,8 @@ if [ $SCREEN_STATE == 1 ] && [ $CAMERA_STATE == 1 ]; then
          exit
       fi
    done
-   caput BL:INJ:FPC2_01:CH0"$SCREEN_NUMBER"SET 0
 fi
+
+caput BL:INJ:FPC2_01:CH0"$SCREEN_NUMBER"SET 0
 
 
